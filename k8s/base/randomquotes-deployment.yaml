@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: randomquotes-web
-          image: adamoctoclose/randomquotes
+          image: adamoctoclose/randomquotes:1.2.3-arm64
           resources:
             requests:
               memory: "64Mi"
