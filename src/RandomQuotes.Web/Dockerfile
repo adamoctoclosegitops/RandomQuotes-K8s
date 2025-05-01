@@ -5,18 +5,22 @@ EXPOSE 8080
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG TARGETARCH
-ARG RUNTIME
+
+# Map Docker arch to .NET runtime identifier
+ENV RUNTIME_ID=linux-x64
+RUN if [ "$TARGETARCH" = "arm64" ]; then RUNTIME_ID=linux-arm64; \
+    elif [ "$TARGETARCH" = "arm/v7" ]; then RUNTIME_ID=linux-arm; fi && \
+    echo "Target runtime: $RUNTIME_ID"
 
 WORKDIR /src
 COPY ["RandomQuotes.Web/RandomQuotes.Web.csproj", "RandomQuotes.Web/"]
 RUN dotnet restore "RandomQuotes.Web/RandomQuotes.Web.csproj"
 
 COPY . .
-WORKDIR "/src/RandomQuotes.Web"
-
-# Use RUNTIME passed from buildx args (linux-x64, linux-arm64, etc.)
+WORKDIR "/src/RandomQuotes.Web" s
+ARG RUNTIME_ID
 RUN dotnet publish "RandomQuotes.Web.csproj" -c Release \
-    --runtime $RUNTIME \
+    --runtime $RUNTIME_ID \
     --self-contained false \
     -o /app/publish /p:UseAppHost=false
 
