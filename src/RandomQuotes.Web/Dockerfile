@@ -17,7 +17,7 @@ COPY ["RandomQuotes.Web/RandomQuotes.Web.csproj", "RandomQuotes.Web/"]
 RUN dotnet restore "RandomQuotes.Web/RandomQuotes.Web.csproj"
 
 COPY . .
-WORKDIR "/src/RandomQuotes.Web" s
+WORKDIR "/src/RandomQuotes.Web"
 ARG RUNTIME_ID
 RUN dotnet publish "RandomQuotes.Web.csproj" -c Release \
     --runtime $RUNTIME_ID \
