@@ -4,6 +4,8 @@ metadata:
   name: randomquotes-dev
   finalizers:
     - resources-finalizer.argocd.argoproj.io/foreground
+  annotations:
+    codefresh.io/product: randomquotes
 spec:
   project: default
   destination:
