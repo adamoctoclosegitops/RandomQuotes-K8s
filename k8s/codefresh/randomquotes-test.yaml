@@ -4,6 +4,8 @@ metadata:
   name: randomquotes-test
   finalizers:
     - resources-finalizer.argocd.argoproj.io/foreground
+  annotations:
+    codefresh.io/product: randomquotes
 spec:
   project: default
   destination:
@@ -23,7 +25,7 @@ spec:
       - Replace=false
       - PruneLast=false
       - Validate=true
-      - CreateNamespace=false
+      - CreateNamespace=true
       - ApplyOutOfSyncOnly=false
       - ServerSideApply=true
       - RespectIgnoreDifferences=false
