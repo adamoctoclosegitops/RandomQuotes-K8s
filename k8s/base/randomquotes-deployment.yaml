@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: randomquotes-deployment  
+  name: randomquotes-deployment
+  annotations:
+    codefresh.io/product: randomquotes
 spec:
   replicas: 1
   selector:
