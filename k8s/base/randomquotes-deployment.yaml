@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: randomquotes-k8s
-          image: octopussamples/randomquotes-k8s
+          image: octopussamples/randomquotes-k8s:latest
           resources:
             requests:
               memory: "64Mi"
