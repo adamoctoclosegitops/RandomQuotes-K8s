@@ -13,9 +13,3 @@ images:
  - name: randomquotes-k8s
    newName: octopussamples/randomquotes-k8s
    newTag: "0.1.6"
-
-patches:
- - target:
-    kind: Ingress
-    name: randomquotes-ingress-nginx  
-   path: randomquotes-ingress-nginx.yaml
