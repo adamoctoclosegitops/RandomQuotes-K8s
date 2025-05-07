@@ -15,8 +15,8 @@ spec:
         component: randomquotes-web
     spec:
       containers:
-        - name: randomquotes-web
-          image: adamoctoclose/randomquotes:latest
+        - name: octopussamples/randomquotes-k8s
+          image: aoctopussamples/randomquotes-k8s
           resources:
             requests:
               memory: "64Mi"
