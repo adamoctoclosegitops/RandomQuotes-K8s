@@ -54,6 +54,19 @@ jobs:
             -t ${{ secrets.DOCKERHUB_REPO }}:${{ steps.gitversion.outputs.semVer }} \
             -t ${{ secrets.DOCKERHUB_REPO }}:latest .
 
+      - name: Report Image to Codefresh
+        uses: codefresh-io/codefresh-report-image@latest
+        with:
+          CF_RUNTIME_NAME: 'codefresh'
+          CF_API_KEY: '${{ secrets.CF_API_KEY }}'
+          CF_CONTAINER_REGISTRY_INTEGRATION: 'dockergitops'
+          CF_IMAGE: '${{ secrets.DOCKERHUB_REPO }}:${{ steps.gitversion.outputs.semVer }}'
+          CF_GIT_BRANCH: '${{ github.ref_name }}'
+          CF_GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          CF_ISSUE_TRACKING_INTEGRATION: 'jiragitops'
+          CF_JIRA_PROJECT_PREFIX: 'RAN'
+          CF_JIRA_MESSAGE: 'RAN-1'
+
       - name: Clone GitOps repo
         uses: actions/checkout@v3
         with:
@@ -81,15 +94,4 @@ jobs:
           git commit -m "Promote image ${{ steps.gitversion.outputs.semVer }} to development"
           git push origin main
 
-      - name: Report Image to Codefresh
-        uses: codefresh-io/codefresh-report-image@latest
-        with:
-          CF_RUNTIME_NAME: 'codefresh'
-          CF_API_KEY: '${{ secrets.CF_API_KEY }}'
-          CF_CONTAINER_REGISTRY_INTEGRATION: 'dockergitops'
-          CF_IMAGE: '${{ secrets.DOCKERHUB_REPO }}:${{ steps.gitversion.outputs.semVer }}'
-          CF_GIT_BRANCH: '${{ github.ref_name }}'
-          CF_GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          CF_ISSUE_TRACKING_INTEGRATION: 'jiragitops'
-          CF_JIRA_PROJECT_PREFIX: 'RAN'
-          CF_JIRA_MESSAGE: 'RAN-1'
+
