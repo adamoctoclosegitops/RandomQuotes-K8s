@@ -60,6 +60,7 @@ jobs:
           repository: adamclosegitops/RandomQuotes-k8s
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: k8s
+          ref: main
 
       - name: Bump image tag in dev overlay
         run: |
