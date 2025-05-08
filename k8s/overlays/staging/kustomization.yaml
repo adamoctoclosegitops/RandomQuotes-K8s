@@ -10,6 +10,6 @@ secretGenerator:
       - homepageDisplay="blah staging"
 
 images:
-  - name: octopussamples/randomquotes-k8s
-    newName: octopussamples/randomquotes-k8s
+  - name: adamoctoclose/randomquotes
+    newName: adamoctoclose/randomquotes
     newTag: 0.1.33
