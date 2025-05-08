@@ -2,14 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: randomquotes-dev
 resources:
-- ../../base
-
+  - ../../base
 secretGenerator:
   - name: random-quotes-secrets
     literals:
       - homepageDisplay="blah dev"
-
 images:
- - name: adamoctoclose/randomquotes
-   newName: adamoctoclose/randomquotes
-   newTag: "0.1.112"
+  - name: adamoctoclose/randomquotes
+    newName: adamoctoclose/randomquotes
+    newTag: "0.1.125"
