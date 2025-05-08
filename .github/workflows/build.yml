@@ -64,20 +64,21 @@ jobs:
         if: github.event.pull_request.merged == true
         uses: codefresh-io/codefresh-report-image@latest
         with:
-          CF_PLATFORM_URL: 'https://g.codefresh.io/'
           CF_RUNTIME_NAME: 'codefresh'
+
           CF_API_KEY: '${{ secrets.CF_API_KEY }}'
+
+          CF_CONTAINER_REGISTRY_INTEGRATION: 'dockergitops'
+
           CF_IMAGE: '${{ secrets.DOCKERHUB_REPO }}:${{ steps.gitversion.outputs.semVer }}'
-          CF_DOCKERHUB_USERNAME: '${{ secrets.DOCKERHUB_PAT_USERNAME }}'
-          CF_DOCKERHUB_PASSWORD: '${{ secrets.DOCKERHUB_PAT }}'
+
           CF_GIT_BRANCH: '${{ github.head_ref }}'
+
           CF_GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          CF_JIRA_HOST_URL: 'https://adamclose.atlassian.net/'
-          CF_JIRA_EMAIL: 'adam.close@octopus.com'
-          CF_JIRA_API_TOKEN: 'secrets.JIRA_TOKEN'
+
+          CF_ISSUE_TRACKING_INTEGRATION: 'jiragitops' 
+
           CF_JIRA_PROJECT_PREFIX: 'RAN'
-          CF_JIRA_MESSAGE: '${{ github.event.pull_request.head.ref }}'
-          CF_ENRICHERS: 'git, jira'
-          CF_LOGS_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          CF_WORKFLOW_NAME: ${{ github.workflow }}
-          CF_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          CF_JIRA_MESSAGE: "RAN-1"
+
