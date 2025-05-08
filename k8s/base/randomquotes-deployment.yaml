@@ -15,7 +15,7 @@ spec:
         component: randomquotes-web
     spec:
       containers:
-        - name: adamoctoclose/randomquotes
+        - name: randomquotes
           image: adamoctoclose/randomquotes:latest
           resources:
             requests:
