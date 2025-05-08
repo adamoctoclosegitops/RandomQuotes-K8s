@@ -64,7 +64,7 @@ jobs:
 
       - name: Bump image tag in dev overlay
         run: |
-          cd k8s/overlays/dev
+          cd overlays/dev
           yq e -i '.images[0].newTag = "${{ steps.gitversion.outputs.semVer }}"' kustomization.yaml
 
       - name: Commit and push changes to GitOps repo
