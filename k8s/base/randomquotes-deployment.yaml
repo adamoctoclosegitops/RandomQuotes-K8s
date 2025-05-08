@@ -5,7 +5,12 @@ metadata:
   annotations:
     codefresh.io/product: randomquotes
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels: 
       component: randomquotes-web
@@ -17,6 +22,10 @@ spec:
       containers:
         - name: randomquotes
           image: adamoctoclose/randomquotes:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: http-port
           resources:
             requests:
               memory: "64Mi"
@@ -24,25 +33,9 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          imagePullPolicy: "Always"
-          ports:
-           - containerPort: 5000
-             name: http-port
           env:
-           - name: RANDOM_SECRET_PHRASE
-             valueFrom:
-               secretKeyRef:
-                 name: random-quotes-secrets
-                 key: homepageDisplay          
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: randomquotes-app-cluster-ip-service  
-spec:
-  type: ClusterIP
-  selector:
-    component: randomquotes-web
-  ports:
-    - port: 6801
-      targetPort: 8080
+            - name: RANDOM_SECRET_PHRASE
+              valueFrom:
+                secretKeyRef:
+                  name: random-quotes-secrets
+                  key: homepageDisplay
