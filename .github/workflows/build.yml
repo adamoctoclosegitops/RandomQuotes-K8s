@@ -8,7 +8,7 @@ on:
       - 'src/**'
       - '.github/**'
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened, synchronize, closed]
     paths:
       - 'src/**'
       - '.github/**'
@@ -61,6 +61,7 @@ jobs:
 
             
       - name: Report Image to Codefresh
+        if: github.event.pull_request.merged == true
         uses: codefresh-io/codefresh-report-image@latest
         with:
           CF_PLATFORM_URL: 'https://g.codefresh.io/'
