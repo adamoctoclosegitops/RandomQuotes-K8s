@@ -61,15 +61,20 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: k8s
           ref: main
+          fetch-depth: 0
+
+      - name: Show files in GitOps repo
+        run: |
+          ls -R k8s
 
       - name: Bump image tag in dev overlay
         run: |
-          cd overlays/dev
+          cd k8s/overlays/dev
           yq e -i '.images[0].newTag = "${{ steps.gitversion.outputs.semVer }}"' kustomization.yaml
 
       - name: Commit and push changes to GitOps repo
         run: |
-          cd gitops
+          cd k8s
           git config user.name "adamoctoclosegitops"
           git config user.email "adam.close+gitopscloud@octopus.com"
           git add overlays/dev/kustomization.yaml
