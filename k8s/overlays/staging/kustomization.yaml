@@ -12,4 +12,4 @@ secretGenerator:
 images:
   - name: adamoctoclose/randomquotes
     newName: adamoctoclose/randomquotes
-    newTag: 0.1.48
+    newTag: 0.1.102
